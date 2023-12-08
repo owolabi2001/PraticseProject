@@ -45,7 +45,6 @@ const addCourses =async(req,res)=>{
 
 }
 
-
 const addStudentToCourse = async (req,res)=>{
     console.log("API to add to student to a Course");
     const {matricNumber, courseCode} = req.body;
@@ -85,11 +84,12 @@ const getStudentsforCourse = async (req,res)=>{
     console.log("API to get a students for a specified course");
     const courseCode = req.params.courseCode; 
     console.log("course code:",courseCode);
-    const course = Course.find({courseCode: courseCode}).populate("student");
-    // const course = Course.find({courseCode: courseCode});
-    // console.log(course.student)
+    // const course = await Course.findOne({courseCode:courseCode});
+    // console.log(course._id); 
+    const course = await Course.findOne({courseCode: courseCode}).populate("student");
+
     console.log(course.student);
-    res.send(course.student);
+    // res.send(course.student);
     
 
 }
