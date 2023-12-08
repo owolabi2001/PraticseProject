@@ -1,4 +1,3 @@
-const { ObjectId } = require("mongodb");
 const { genericResponse } = require("../dto/genericResponse");
 const Course = require("../model/courseModel");
 const Student = require("../model/studentModel");
@@ -43,41 +42,9 @@ const addCourses =async(req,res)=>{
         }
     
     }
-    // return res.status(401).json(
-    //     genericResponse(
-    //         "11",
-    //         "Something happened",
-    //         null,null
-    //     )
-    // )
-    
-}
-
-const AddCourseToStudent = async (req,res)=>{
-    const {studentName,courseName} = req.body;
-    const check = req.query.check;
-    console.log("check =========>",check);
-    const student = await Student.findOne({name:studentName});
-    console.log(student); 
-    const course = await Course.findOne({courseTitle:courseName});
-    
-    console.log("course Id: ",course._id);
-    // console.log("Student Id: ",student._id);
-    console.log("student name " + studentName);
-
-    student.course.push({$ref:"course",$id:course._id});
-
-    const done = await student.save();
-    if(done){
-        return res.status(201).json(genericResponse( 
-            "00",
-            "Student is successfully added",
-            student,
-            null
-        ))
-    }
 
 }
+
 
 const addStudentToCourse = async (req,res)=>{
     console.log("API to add to student to a Course");
@@ -88,10 +55,12 @@ const addStudentToCourse = async (req,res)=>{
     const student = await Student.findOne({matricNo:matricNumber});
     const course = await Course.findOne({courseCode});
 
+    const studentCount = course.student.length;
+
+
     console.log("Student Id is: ",student);
-    console.log("student",student._id);
     console.log("Course Id is:", course);
-    if(student == null && course == null){ 
+    if(!student || !course ){ 
         return res.status(401).json(
             genericResponse(
                 "11","Either course or Student is not registered",
@@ -101,20 +70,33 @@ const addStudentToCourse = async (req,res)=>{
     }
     
     const updating  =  course.student.push(student._id);
-    console.log(`updating =====>${updating}`);
     course.save();
 
-    if(updating){
+    if(updating >studentCount){
         res.status(200).json(genericResponse(
             "00",
             "Student has been added to course",
-            null,null
+            null,null 
         ))
     }
 }
 
+const getStudentsforCourse = async (req,res)=>{
+    console.log("API to get a students for a specified course");
+    const courseCode = req.params.courseCode; 
+    console.log("course code:",courseCode);
+    const course = Course.find({courseCode: courseCode}).populate("student");
+    // const course = Course.find({courseCode: courseCode});
+    // console.log(course.student)
+    console.log(course.student);
+    res.send(course.student);
+    
+
+}
+
 module.exports = {
     addCourses,
-    addStudentToCourse
+    addStudentToCourse,
+    getStudentsforCourse
 
 }
