@@ -11,11 +11,11 @@ const courseSchema = mongoose.Schema({
         type: String,
         required: [true, "Course code is requied "],
         unique: [true,"Course code must be unique"]
-    },
+    }, 
     courseUnit: {
         type:String,
         required: [true, "Course Unit is requied "],
-        unique: [true,"Course Unit must be unique"]
+        // unique: [true,"Course Unit must be unique"]
     },
     student: [{
         type: mongoose.Schema.Types.ObjectId,

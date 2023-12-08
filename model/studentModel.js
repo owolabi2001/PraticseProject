@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const studentSchema = mongoose.Schema({
     name: {
         type: String,
-        required: [true,"I is required to input your name"]
+        required: [true,"name is a required input"]
     },
     email:{
         type: String,

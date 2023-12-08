@@ -1,5 +1,5 @@
 const express = require("express");
-const {addCourses} =require("../controller/courseController");
+const {addCourses,addStudentToCourse} =require("../controller/courseController");
 
 routes = express.Router();
 
@@ -7,5 +7,6 @@ routes = express.Router();
 
 
 routes.route("/").post(addCourses);
+routes.route("/").put(addStudentToCourse);
 
 module.exports = routes;

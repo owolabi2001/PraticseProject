@@ -7,7 +7,7 @@ const addStudent = async(req,res)=>{
     const student = await Student.findOne({email});
     console.log(student);
     if(student){
-        res.status(200).json(genericResponse(
+        res.status(200).json(genericResponse( 
             "00",
             "Your email must be unique",
             req.body,

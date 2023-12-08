@@ -14,6 +14,6 @@ app.use("/api/course",require("./routes/coursesRoutes"));
 
 app.listen(port,()=>{
     console.log(
-        `😂😂😂😂😂 ==========> Backend Service On port ${port}`);
+        `😂😂😂😂😂 ==========> Backend Service Running On port ${port}`);
 })
 
