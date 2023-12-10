@@ -3,26 +3,35 @@ const Course = require("../model/courseModel");
 const Student = require("../model/studentModel");
 
 
-// Code still doesn't work well to return error
+
 const addCourses =async(req,res)=>{
+
     console.log("API to add course");
     const {courseTitle,courseCode,courseUnit} = req.body;
 
-    const courseTitleCheck = await Course.find({courseTitle});
+    const courseTitleCheck = await Course.findOne({courseTitle});
     console.log(courseTitleCheck);
     
-    const courseCodeCheck = await Course.find({courseCode});
+    const courseCodeCheck = await Course.findOne({courseCode});
     console.log(courseCodeCheck);
-    // const courseUnitCheck = await Course.find({courseUnit});
 
-    if(!courseTitleCheck || !courseCodeCheck ){  
-        console.log("==========> Code is reaching here"); 
-        return res.status(401).json(
+    if (courseCodeCheck && courseTitleCheck){
+        return res.status(405).json(genericResponse(
+            "11",
+            "course title and course code must be unique",res.body,null
+        ));
+    }else if(courseTitleCheck){  
+        return res.status(405).json(
             genericResponse("11",
-            "All input feed must be unique",
+            "Course Title already exists before",
             req.body,null
             )
         )
+    }else if(courseCodeCheck){
+        return res.status(405).json(genericResponse(
+            "11",
+            "Course Code must be unique", req.body,null
+        ));
     }else{
         const course = await Course.create({
             courseTitle,
@@ -89,7 +98,20 @@ const getStudentsforCourse = async (req,res)=>{
     const course = await Course.findOne({courseCode: courseCode}).populate("student");
 
     console.log(course.student);
-    // res.send(course.student);
+    const students = course.student;
+    if(students){
+        return res.status(201).json(genericResponse(
+            "00",
+            "The Students associated with this course are: ",
+            students,
+            null
+        ));
+    }
+    return  res.status(404).json(genericResponse(
+        "11",
+        "There are no students associated with this course.",null,null
+    ));
+    
     
 
 }
