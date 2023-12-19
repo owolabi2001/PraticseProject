@@ -4,7 +4,7 @@ const Student = require("../model/studentModel");
 
 
 
-const addCourses =async(req,res)=>{
+const addCourses = async (req,res)=>{
 
     console.log("API to add course");
     const {courseTitle,courseCode,courseUnit} = req.body;

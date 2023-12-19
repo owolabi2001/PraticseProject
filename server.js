@@ -17,3 +17,5 @@ app.listen(port,()=>{
         `😂😂😂😂😂 ==========> Backend Service Running On port ${port}`);
 })
 
+
+module.exports = app;

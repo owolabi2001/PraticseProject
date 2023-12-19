@@ -5,11 +5,6 @@ const {addCourses,
     addStudentToCourse,
     getStudentsforCourse} =require("../controller/courseController");
 
-
-
-
-
-
 routes.route("/").post(addCourses);
 routes.route("/").put(addStudentToCourse);
 routes.route("/:courseCode").get(getStudentsforCourse);
