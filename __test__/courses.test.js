@@ -52,6 +52,8 @@ describe("Testing all the case for add Course endpoint", () => {
     });
 
     // it("", async()=>{
+    //     // mock
+    //     Course.findOne({}).mockResolvedValue(true)
 
     // });
 
