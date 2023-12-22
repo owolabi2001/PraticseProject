@@ -1,11 +1,16 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "My API",
-    "version": "2.0.0",
-    "description": "Description"
+    "title": "Praticse Project",
+    "version": "1.0.0",
+    "description": "**The purpose of the project is to denmonstrate proficency in node js and other technologies**"
   },
   "host": "localhost:8080",
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
   "basePath": "/",
   "schemes": [
     "http"
@@ -13,6 +18,9 @@
   "paths": {
     "/api/student/": {
       "post": {
+        "tags": [
+          "Students"
+        ],
         "description": "",
         "parameters": [
           {
@@ -39,10 +47,27 @@
             "description": "OK"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Students"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
       }
     },
     "/api/student/{email}": {
       "get": {
+        "tags": [
+          "Students"
+        ],
         "description": "",
         "parameters": [
           {
@@ -61,6 +86,9 @@
     },
     "/api/course/": {
       "post": {
+        "tags": [
+          "Courses"
+        ],
         "description": "",
         "parameters": [
           {
@@ -92,6 +120,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Courses"
+        ],
         "description": "",
         "parameters": [
           {
@@ -127,6 +158,9 @@
     },
     "/api/course/{courseCode}": {
       "get": {
+        "tags": [
+          "Courses"
+        ],
         "description": "",
         "parameters": [
           {

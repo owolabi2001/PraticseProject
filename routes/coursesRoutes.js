@@ -5,8 +5,14 @@ const {addCourses,
     addStudentToCourse,
     getStudentsforCourse} =require("../controller/courseController");
 
-routes.route("/").post(addCourses);
-routes.route("/").put(addStudentToCourse);
-routes.route("/:courseCode").get(getStudentsforCourse);
+routes.route("/").post(
+    // #swagger.tags = ['Courses']
+    addCourses);
+routes.route("/").put(
+    // #swagger.tags = ['Courses']
+    addStudentToCourse);
+routes.route("/:courseCode").get(
+    // #swagger.tags = ['Courses']
+    getStudentsforCourse);
 
 module.exports = routes;

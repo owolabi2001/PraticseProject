@@ -65,7 +65,24 @@ const getStudentByEmail = async (request, response)=>{
         "00","The student with this email: ",studentCheck,null
     ));
 }
+
+const getAllStudent = async(req,res)=>{
+    const students = await Student.find();
+    if(!students){
+        return res.status(400).json(
+            genericResponse("11"
+            ,"There are no students availabe"
+            ,null,null)
+        );
+    }
+    
+    return res.status(200).json(
+        genericResponse("00","The students available are",students,null)
+    );
+
+}
 module.exports = {
     addStudent,
-    getStudentByEmail
+    getStudentByEmail,
+    getAllStudent
 }
